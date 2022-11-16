@@ -1,8 +1,20 @@
-import Navbar from "react-flask-app/src/components/Navbar.jsx"
+import React from 'react'
+import { Routes, Route } from 'react-router-dom';
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
 
 function App() {
   return (
-    <div>App</div>
+  <>
+    <Navbar/>
+    <div className="container">
+      <Routes>
+          <Route path='/' element ={<Home/>}/>
+
+
+      </Routes>
+    </div>
+  </>
   )
 }
 
