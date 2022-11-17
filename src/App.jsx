@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Signup from "./components/Signup";
 import Alert from "./components/Alert"
+import Login from './components/Login'
 
 function App() {
   const [message,setMessage] = useState(null);
@@ -23,6 +24,7 @@ function App() {
       <Routes>
           <Route path='/' element ={<Home/>}/>
           <Route path='/signup' element ={<Signup flashMessage={flashMessage}/>}/>
+          <Route path='/login' element ={<Login/>}/>
 
 
       </Routes>
