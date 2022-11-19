@@ -27,7 +27,7 @@ let response = await fetch('https://kekambas-blog.herokuapp.com/auth/token', {
 
 if (response.ok){
     let data = await response.json()
-        .then(res=>res.json())
+        //.then(res=>res.json())
         //instead of logging the data, a local storage built  can be used
         //.then (data=>console.log(data))
      
@@ -35,13 +35,14 @@ if (response.ok){
             //store values in local stoarge on the browser
             localStorage.setItem('token',token);
             //redirect back to home back
-            //props.flashMessage("You have succesfully logged in", "success"); NOT WORKING SO I HAD TO COMMENT OUT
+            props.flashMessage("You have succesfully logged in", "success"); 
+            props.logUserIn()
             navigate('/');
         }
-        //else {
+        else {
             // flash a fail message
-            //props.flashMessage('Your username and/or password are incorrect', 'danger') NOT WORKING SO I HAD TO COMMENT OUT
-        //}
+            props.flashMessage('Your username and/or password are incorrect', 'danger') 
+        }
 
     }
   return (
