@@ -1,11 +1,11 @@
 import React from 'react';
-import {useNavigate}  from 'react-router-dom';
+import { useNavigate }  from 'react-router-dom';
 
 export default function Login(props) {
 
     const navigate=useNavigate();
 
-    const handleSubmit =event=>{
+    const handleSubmit = async event=>{
         event.preventDefault();
         console.log(event);
 
@@ -20,21 +20,28 @@ let stringToEncode=`${username}:${password}`
 let myHeaders =new Headers();
 myHeaders.append('Authorization',`Basic ${btoa(stringToEncode)}`)
 
-fetch('https://kekambas-blog.herokuapp.com/auth/token', {
+let response = await fetch('https://kekambas-blog.herokuapp.com/auth/token', {
     method: 'POST',
     headers: myHeaders
 })
+
+if (response.ok){
+    let data = await response.json()
         .then(res=>res.json())
         //instead of logging the data, a local storage built  can be used
         //.then (data=>console.log(data))
-        .then(data=>{
-            //get token from the response
+     
             let token =data.token;
             //store values in local stoarge on the browser
             localStorage.setItem('token',token);
             //redirect back to home back
-            navigate()
-        })
+            //props.flashMessage("You have succesfully logged in", "success"); NOT WORKING SO I HAD TO COMMENT OUT
+            navigate('/');
+        }
+        //else {
+            // flash a fail message
+            //props.flashMessage('Your username and/or password are incorrect', 'danger') NOT WORKING SO I HAD TO COMMENT OUT
+        //}
 
     }
   return (
